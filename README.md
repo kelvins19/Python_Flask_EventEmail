@@ -8,9 +8,10 @@ This project is a simple web application that is able to serve a POST endpoint. 
 
 ## How to run this application
 1. Open terminal
-2. Run `source bin/activate`
-3. Run `flask run`. The scheduler to check on the timestamp will also run when we run this command.
-4. The application will run in `127.0.0.1:5000`
+2. Run `pip install -r requirements.txt`
+3. Run `source bin/activate`
+4. Run `flask run`. The scheduler to check on the timestamp will also run when we run this command.
+5. The application will run in `127.0.0.1:5000`
 
 ## API Lists
 - POST 127.0.0.1:5000/save_email
