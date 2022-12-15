@@ -5,7 +5,28 @@ This project is a simple web application that is able to serve a POST endpoint. 
 ## Stack
 - Python v3.8
 - SQLite 3 as the database
+- Redis Server
 
+## Database Schema
+- Table email
+
+|Column name| Type|
+|-------------|----|
+| id| int|
+|event_id| int|
+|email_subject| string|
+|email_content| string|
+|timestamp| timestamp|
+|is_sent| int 0 / 1|
+
+- Table email_recipients
+
+|Column name| Type|
+|-------------|----|
+| id| int|
+|event_id| int|
+|email_address| string|
+|is_sent| int 0 / 1|
 ## How to run this application
 1. Open terminal
 2. Run `pip install -r requirements.txt`

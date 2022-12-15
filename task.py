@@ -36,10 +36,12 @@ def check_timestamp():
         emailContent = i[3]
         timestamp = i[4]
 
-        if datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S') <= datetime.datetime.now():
+        if datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S') == datetime.datetime.now():
             c.execute("SELECT * FROM email_recipients WHERE event_id=? AND is_sent=0", (eventId,))
             emailRecipients = c.fetchall()
 
+            db = sqlite3.connect('email.db')
+            c = db.cursor()
             for j in emailRecipients:
                 emailAddress = j[2]
 
@@ -48,9 +50,8 @@ def check_timestamp():
                 print("Email sent to " + emailAddress)
 
                 c.execute("UPDATE email_recipients SET is_sent = 1 WHERE event_id = ? and id = ?", (eventId, j[0]))
+                db.commit()
 
-            db = sqlite3.connect('email.db')
-            c = db.cursor()
             c.execute("UPDATE email SET is_sent = 1 WHERE event_id = ?", (eventId,))
             db.commit()
     print("Scheduler running")
