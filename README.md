@@ -31,6 +31,5 @@ The purpose is to return all the list of recipients email address
 - GET 127.0.0.1:5000/get-email-recipients/{event_id}
 The purpose is to return all the recipients email address based on certain event_id
 
-## Need to be added / implemented
-- Mailer service to enable send email functionality
-- Queue task to check on which email need to be sent based on timestamp -- Redis Task Queue
+## Need to be fixed
+- Celery queue task, implemented but not yet working properly
