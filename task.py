@@ -3,6 +3,7 @@ from flask_mail import Mail, Message
 import sqlite3
 import json
 import datetime
+from celery_utils import get_celery_app_instance
 
 app = Flask(__name__)
 app.config['MAIL_SERVER']='smtp.gmail.com'
@@ -12,6 +13,15 @@ app.config['MAIL_PASSWORD'] = ''
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
+
+# celery app instance
+celery = get_celery_app_instance(app)
+
+@celery.task
+def send_email(emailAddress, emailSubject, emailContent):
+    msg = Message(emailSubject, sender = 'kelvin.s.ks19@gmail.com', recipients = [emailAddress])
+    msg.body = emailContent
+    mail.send(msg)
 
 # Function to check on the timestamp and send email
 def check_timestamp():
@@ -34,9 +44,7 @@ def check_timestamp():
                 emailAddress = j[2]
 
                 print("Send email to " + emailAddress)
-                msg = Message(emailSubject, sender = 'kelvin.s.ks19@gmail.com', recipients = [emailAddress])
-                msg.body = emailContent
-                mail.send(msg)
+                send_email(emailAddress, emailSubject, emailContent).delay()
                 print("Email sent to " + emailAddress)
 
                 c.execute("UPDATE email_recipients SET is_sent = 1 WHERE event_id = ? and id = ?", (eventId, j[0]))

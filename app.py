@@ -12,7 +12,6 @@ app = Flask(__name__)
 scheduler = BackgroundScheduler()
 scheduler.add_job(check_timestamp, trigger="interval", seconds=1)
 scheduler.start()
-
 # Shut down the scheduler when exiting the app
 atexit.register(lambda: scheduler.shutdown())
 

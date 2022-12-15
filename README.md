@@ -33,4 +33,4 @@ The purpose is to return all the recipients email address based on certain event
 
 ## Need to be added / implemented
 - Mailer service to enable send email functionality
-- Queue task to check on which email need to be sent based on timestamp
+- Queue task to check on which email need to be sent based on timestamp -- Redis Task Queue
