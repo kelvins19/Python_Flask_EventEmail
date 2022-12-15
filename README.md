@@ -2,6 +2,10 @@
 
 This project is a simple web application that is able to serve a POST endpoint. The main function of the endpoint is to store in the database an email for a particular group of recipients. The emails are then to be sent ​automatically​ at a later time.
 
+## Stack
+- Python v3.8
+- SQLite 3 as the database
+
 ## How to run this application
 1. Open terminal
 2. Run `source bin/activate`
