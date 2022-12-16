@@ -46,7 +46,7 @@ def check_timestamp():
                 emailAddress = j[2]
 
                 print("Send email to " + emailAddress)
-                send_email(emailAddress, emailSubject, emailContent).delay()
+                send_email().delay(emailAddress, emailSubject, emailContent)
                 print("Email sent to " + emailAddress)
 
                 c.execute("UPDATE email_recipients SET is_sent = 1 WHERE event_id = ? and id = ?", (eventId, j[0]))
